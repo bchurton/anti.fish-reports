@@ -41,7 +41,6 @@ module.exports = {
 			)
 			
 			const msg = await message.channel.send({ embeds:[embed], components:[row] })
-			client.messages[msg.id] = message.author.id
 		}
 		catch (err) {
 			console.log(err)
