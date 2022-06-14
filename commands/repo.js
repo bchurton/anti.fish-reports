@@ -13,7 +13,7 @@ module.exports = {
 			await message.channel.send({ embeds:[embed] })
 		}
 		catch (err) {
-			return message.channel.send(`\`\`\`\n${err}\`\`\``)
+			return message.channel.send(`\`\`\`\n${err}\`\`\``) //for development debugging
 		}
 		
 	}
