@@ -9,7 +9,6 @@ const client = new Client({
 });
 discordModals(client);
 
-client.messages = {}
 client.commands = new Collection()
 const prefix = "-"
 
