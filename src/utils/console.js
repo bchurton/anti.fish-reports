@@ -12,8 +12,13 @@ const printWarning = (text) => {
 	console.warn(chalk.yellow("WARNING"), text);
 };
 
+const printDebug = (text) => {
+	console.warn(chalk.grey("DEBUG"), text);
+};
+
 module.exports = {
 	printSuccess,
 	printError,
 	printWarning,
+	printDebug,
 };
