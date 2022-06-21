@@ -3,20 +3,21 @@ const { Modal, TextInputComponent, SelectMenuComponent, showModal } = require('d
 module.exports = {
     name: "interactionCreate",
     async execute(client, interaction) {
-		if (interaction.customId === "submitReport") {
+		if (interaction.customId.includes("submitReport")) {
 			try {
-				const message = interaction.message
-				const domain = message.embeds[0].description.toLowerCase().match(/(?:[A-z0-9](?:[A-z0-9-]{0,61}[A-z0-9])?\.)+[A-z0-9][A-z0-9-]{0,61}[A-z0-9]/)[0]
+				const userid = interaction.customId.replace("submitReport", "").split("|")[0]
+				if (interaction.user.id !== userid) {
+					return await interaction.reply({ content:`Only the message author can submit this report!`, ephemeral:true })
+				}
 
 				const modal = new Modal()
-					.setCustomId('reportModal')
+					.setCustomId(`domainReport`)
 					.setTitle('Submit Domain Report')
 					.addComponents(
 					new TextInputComponent()
 						.setCustomId('domain')
 						.setLabel('Domain')
 						.setStyle('SHORT')
-						.setDefaultValue(domain)
 						.setRequired(true),
 
 					new SelectMenuComponent()
@@ -58,7 +59,12 @@ module.exports = {
 			}
 
 		}
-		else if (interaction.customId === "cancelReport") {
+		else if (interaction.customId.includes("cancelReport")) {
+			const toSplit = interaction.customId.replace("cancelReport", "").split("|")
+			const userid = toSplit[0]
+			if (interaction.user.id !== userid) {
+				return await interaction.reply({ content:`Only the message author can submit this report!`, ephemeral:true })
+			}
 			await interaction.message.delete()
 		}
     }
