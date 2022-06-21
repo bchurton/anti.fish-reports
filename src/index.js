@@ -3,6 +3,7 @@ require("./handle-exceptions");
 
 const { Client, Intents, Collection } = require("discord.js");
 const discordModals = require("discord-modals");
+const config = require("./config");
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -52,4 +53,4 @@ client.commands = new Collection();
 // 	} catch {}
 // });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(config.discordToken);
