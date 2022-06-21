@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton, Interaction } = require("discord.js")
+const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js")
 const fetch = require("node-fetch")
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
             } 
         });
         const data = await response.json()
-        console.log(data)
+
         if (data.accepted) {
             let embed = new MessageEmbed()
                 .setDescription(`Successfully reported **${domain}** to fishfish.gg!`)
@@ -43,9 +43,9 @@ module.exports = {
         }
         else {
             let embed = new MessageEmbed()
-                .setDescription(`An error occured whilst reporting this domain!\n**"${data.reason}"**`)
+                .setDescription(`An error occured whilst reporting **${domain}**!\n**"${data.reason}"**`)
                 .setColor("ad071a")
-            await modal.reply({ content:`An error occured whilst reporting this domain.\n**${data.reason}**`, ephemeral:true })
+            await modal.reply({ content:`An error occured whilst reporting **${domain}**.\n**${data.reason}**`, ephemeral:true })
             await modal.message.edit({ embeds:[embed], components:[] })
         }
         
