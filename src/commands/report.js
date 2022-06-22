@@ -1,15 +1,17 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+
 module.exports = {
 	name: "report",
 	usage: "report",
 	description: "Submit a domain report!",
-	async execute(client, message, args) {
-		let embed = new MessageEmbed()
+	async execute(_client, message) {
+		const embed = new MessageEmbed()
+			.setColor("ffffff")
 			.setDescription(
 				`Want to report a domain? Click the button below to report a domain to Fishfish.gg!`,
-			)
-			.setColor("ffffff");
-		let row = new MessageActionRow()
+			);
+
+		const actionRow = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
 					.setCustomId(`submitReport${message.author.id}`)
@@ -23,6 +25,9 @@ module.exports = {
 					.setStyle("DANGER"),
 			);
 
-		const msg = await message.channel.send({ embeds: [embed], components: [row] });
+		return message.channel.send({
+			embeds: [embed],
+			components: [actionRow],
+		});
 	},
 };
