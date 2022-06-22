@@ -3,7 +3,10 @@ require("./handle-exceptions");
 
 const { Client, Intents, Collection } = require("discord.js");
 const discordModals = require("discord-modals");
+const loadCommands = require("./handlers/command");
+const loadEvents = require("./handlers/event");
 const config = require("./config");
+const { join } = require("path");
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -11,21 +14,14 @@ const client = new Client({
 });
 
 discordModals(client);
+
 client.commands = new Collection();
 
-// console.log(chalk.red("LOADING COMMANDS..."));
-// for (file of fs.readdirSync("./commands").filter((f) => f.endsWith(".js"))) {
-// 	const cmd = require(`./commands/${file}`);
-// 	client.commands.set(cmd.name, cmd);
-// 	console.log(chalk.green(`Loaded ${cmd.name}`));
-// }
+const commandDir = join(__dirname, "commands");
+const eventDir = join(__dirname, "events");
 
-// console.log(chalk.red("\n\nLOADING EVENTS..."));
-// for (file of fs.readdirSync("./events").filter((f) => f.endsWith(".js"))) {
-// 	const event = require(`./events/${file}`);
-// 	client.on(event.name, (...args) => event.execute(client, ...args));
-// 	console.log(chalk.green(`Loaded ${event.name}`));
-// }
+loadCommands(client, commandDir);
+loadEvents(client, eventDir);
 
 // client.on("messageCreate", async (message) => {
 // 	if (message.author.bot) return;
