@@ -1,3 +1,4 @@
+const config = require("../config");
 const chalk = require("chalk");
 
 const printSuccess = (text) => {
@@ -13,6 +14,7 @@ const printWarning = (text) => {
 };
 
 const printDebug = (text) => {
+	if (!config.debug) return;
 	console.warn(chalk.grey("DEBUG"), text);
 };
 
