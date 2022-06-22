@@ -1,3 +1,5 @@
+const { printSuccess } = require("../../utils/console");
+
 module.exports = {
 	name: "ready",
 	execute() {
