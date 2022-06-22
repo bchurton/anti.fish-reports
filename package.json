@@ -9,7 +9,7 @@
 		"url": "git@github.com:bchurton/anti.fish-reports.git"
 	},
 	"engines": {
-		"node": ">=14.0.0"
+		"node": ">=16.0.0"
 	},
 	"scripts": {
 		"format": "npx prettier --write src"
