@@ -5,7 +5,7 @@ const fileExtensions = [".js"];
 const walkFiles = (path, paths = []) => {
 	for (const file of readdirSync(path, { withFileTypes: true })) {
 		if (file.isDirectory()) {
-			walkDir(`${path}/${file.name}`, paths);
+			walkFiles(`${path}/${file.name}`, paths);
 		} else if (fileExtensions.some((ext) => file.name.endsWith(ext))) {
 			paths.push(`${path}/${file.name}`);
 		}
