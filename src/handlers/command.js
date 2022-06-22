@@ -7,7 +7,7 @@ const loadCommands = (client, commandDir) => {
 	const filePaths = walkFiles(commandDir);
 
 	const handle = (command) => {
-		client.commands.set(command.name, command.execute);
+		client.commands.set(command.name, command);
 		printSuccess(`Loaded command '${command.name}'`);
 	};
 
